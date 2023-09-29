@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>To-Do List </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+  
+    <link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="style2.css">
+  </head>
+ <style>
+
+ </style>
+    <body>
+    <header>
+      <h1>Task Manager</h1>
+    </header>
+	<div id="alertModal" class="modal">
+		<div class="modal-content">
+		  <h2 style="color: blue;">How to use the task manager</h2>
+		  <!-- <p>Drag and drop for the correct answer</p> -->
+		 <img src="ezgif.com-crop.gif" alt="">
+			
+		  </video>
+		  <button id="skipButton" class="glow-on-hover" onclick="skipInstruction()">Skip Instruction</button>
+		</div>
+	  </div>
+	  
+    <div class="add-task-container">
+      <input type="text" maxlength="12" id="taskText" placeholder="New Task..." onkeydown="if (event.keyCode == 13)
+                            document.getElementById('add').click()">
+    <button id="add" class="glow-on-hover" onclick="addTask()">Add New Task</button>
+    </div>
+
+    <div class="main-container">
+      <ul class="columns">
+
+        <li class="column to-do-column">
+          <div class="column-header">
+            <h4>To Do</h4>
+          </div>
+          <ul class="task-list" id="to-do">
+            <li class="task">
+              <p>Research</p>
+            </li>
+            <li class="task">
+              <p>Coding</p>
+            </li>
+            <li class="task">
+              <p>Study</p>
+            </li>
+            <li class="task">
+              <p>Shopping</p>
+            </li>
+          </ul>
+        </li>
+
+        <li class="column doing-column">
+          <div class="column-header">
+            <h4>Doing</h4>
+          </div>
+          <ul class="task-list" id="doing">
+            <li class="task">
+              <p>Assignment</p>
+            </li>
+            <li class="task">
+              <p>User Testing</p>
+            </li>
+            <li class="task">
+              <p>UI/Design</p>
+            </li>
+          </ul>
+        </li>
+
+        <li class="column done-column">
+          <div class="column-header">
+            <h4>Done</h4>
+          </div>
+          <ul class="task-list" id="done">
+            <li class="task">
+              <p>Meeting</p>
+            </li>
+            <li class="task">
+              <p>Submit</p>
+            </li>
+          </ul>
+        </li>
+
+        <li class="column trash-column">
+          <div class="column-header">
+            <h4>Trash</h4>
+          </div>
+          <ul class="task-list" id="trash">
+            <li class="task">
+              <p>Interviews</p>
+            </li>
+            <li class="task">
+              <p>Research</p>
+            </li>
+
+          </ul>
+          <div class="column-button">
+            <button id="delete" class="del-btn" onclick="emptyTrash()">
+          
+          <!-- <button id="delete" class="del-btn" type="button" aria-label="Delete"> -->
+            <svg class="del-btn__icon" viewBox="0 0 48 48" width="48px" height="48px" aria-hidden="true">
+              <clipPath id="can-clip">
+                <rect class="del-btn__icon-can-fill" x="5" y="24" width="14" height="11" />
+              </clipPath>
+              <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" transform="translate(12,12)">
+                <g class="del-btn__icon-lid">
+                  <polyline points="9,5 9,1 15,1 15,5" />
+                  <polyline points="4,5 20,5" />
+                </g>
+                <g class="del-btn__icon-can">
+                  <g stroke-width="0">
+                    <polyline id="can-fill" points="6,10 7,23 17,23 18,10" />
+                    <use clip-path="url(#can-clip)" href="#can-fill" fill="#fff" />
+                  </g>
+                  <polyline points="6,10 7,23 17,23 18,10" />
+                </g>
+              </g>
+            </svg>
+            <span class="del-btn__letters" aria-hidden="true" data-anim>
+              <span class="del-btn__letter-box">
+                <span class="del-btn__letter">D</span>
+              </span>
+              <span class="del-btn__letter-box">
+                <span class="del-btn__letter">e</span>
+              </span>
+              <span class="del-btn__letter-box">
+                <span class="del-btn__letter">l</span>
+              </span>
+              <span class="del-btn__letter-box">
+                <span class="del-btn__letter">e</span>
+              </span>
+              <span class="del-btn__letter-box">
+                <span class="del-btn__letter">t</span>
+              </span>
+              <span class="del-btn__letter-box">
+                <span class="del-btn__letter">e</span>
+              </span>
+            </span>
+          </button>
+        </li>
+
+      </ul>
+    </div>
+<div class="Instructions">
+  <button class="inst"> <a href="giphy (3).gif">Read Instruction</a></button>
+
+</div>
+    <footer>
+      <p style="color: blue;">All right reserve Narendra Singh Jadaun</p>
+    </footer>
+<script>
+  window.addEventListener("DOMContentLoaded",() => {
+	const d = new DeleteButton("#delete");
+});
+
+class DeleteButton {
+	isRunning = false;
+
+	constructor(el) {
+		this.el = document.querySelector(el);
+		this.init();
+	}
+	init() {
+		this.el?.addEventListener("click",this.delete.bind(this));
+		
+		const resetTrigger = this.el?.querySelector("[data-anim]");
+		resetTrigger?.addEventListener("animationend",this.reset.bind(this));
+	}
+	delete() {
+		this.isRunning = true;
+		this.displayState();
+	}
+	displayState() {
+		this.el.disabled = this.isRunning;
+		this.el.setAttribute("data-running",this.isRunning);
+	}
+	reset() {
+		this.isRunning = false;
+		this.displayState();
+	}
+}
+// Function to show the alert modal
+// Function to show the alert modal
+function showAlert() {
+  var modal = document.getElementById('alertModal');
+  if (modal) {
+    modal.style.display = 'block';
+
+    // Automatically close the modal after 11 seconds
+    setTimeout(function () {
+      modal.style.display = 'none';
+    }, 11000); // 11 seconds in milliseconds
+  } else {
+    console.error('Alert modal not found.');
+  }
+}
+
+// Function to skip the instruction
+function skipInstruction() {
+  var modal = document.getElementById('alertModal');
+  if (modal) {
+    modal.style.display = 'none';
+  } else {
+    console.error('Alert modal not found.');
+  }
+}
+
+// Call the showAlert function when the page loads
+window.addEventListener('DOMContentLoaded', function () {
+  showAlert();
+});
+
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
